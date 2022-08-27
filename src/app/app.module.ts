@@ -6,15 +6,16 @@ import { AppComponent } from './app.component';
 import { OrderModule } from './order/order.module';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterialModule } from './material.module';
 
 
 const routes: Routes = []
 
 @NgModule({
-  declarations: [AppComponent, 
+  declarations: [AppComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, RouterModule, OrderModule, AppRoutingModule],
+  imports: [BrowserModule, HttpClientModule, RouterModule, OrderModule, AppRoutingModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

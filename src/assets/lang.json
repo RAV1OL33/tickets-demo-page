@@ -1,0 +1,21 @@
+{
+    "ru":{
+        "order_summary":{
+            "airportFromInput": "Откуда",
+            "airportToInput": "Куда",
+            "datepickerFromInput": "Когда",
+            "datepickerToInput": "Обратно",
+            "nextButton": "Оформить",
+            "passengers": "Пассажиры"
+        },
+        "passengers_details":{
+            "passengerTitle": "",
+            "passengerFirstName": "",
+            "passengerLastName": "",
+            "passengerBirthDate": "",
+            "passengerPassNo": "",
+            "passengerPassType": "",
+            "passengerPassExpireDate": ""
+        }
+    }
+}
