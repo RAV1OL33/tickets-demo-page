@@ -2,6 +2,7 @@
     "ru":{
         "order_summary":{
             "airportFromInput": "Откуда",
+            "inputSubString": "",
             "airportToInput": "Куда",
             "datepickerFromInput": "Когда",
             "datepickerToInput": "Обратно",
