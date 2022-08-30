@@ -2,10 +2,10 @@
     <div class="order-details__body">
         <div class="order-details__destination-container">
             <div class="order-details__destination">
-                <app-destination-picker></app-destination-picker>
+                <app-destination-picker (airportEvent)="setToAirport($event)"></app-destination-picker>
             </div>
             <div class="order-details__destination">
-                <app-destination-picker></app-destination-picker>
+                <app-destination-picker (airportEvent)="setFromAirport($event)"></app-destination-picker>
             </div>
         </div>
         <div class="order-details__destination-restrictions">
@@ -17,43 +17,68 @@
             </div>
             <div>
                 <button>-</button>
-                <div></div><button (click)="passengers.push([])">+</button>
+                <div>{{passengers.length}}</div><button (click)="addNewPassenger()">+</button>
             </div>
         </div>
         <div class="order-details__passengers-list">
             <div class="order-details__passengers-lits__passenger-card"
                 *ngFor="let passenger of passengers;let i = index">
                 <mat-card class="example-card">
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                    <mat-card-title>Passenger {{i+1}}</mat-card-title>
+                    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                    <mat-card-title>{{pageDict.passenger_details.passengerTitle}} {{i+1}}</mat-card-title>
                     <mat-card-content>
                         <mat-form-field class="example-form-field" appearance="fill">
-                            <mat-label>Clearable input</mat-label>
-                            <input matInput type="text" [(ngModel)]="value">
-                            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                              <mat-icon>close</mat-icon>
+                            <mat-label>{{pageDict.passenger_details.passengerFirstName}}</mat-label>
+                            <input matInput type="text" [(ngModel)]="passenger.fName">
+                            <button *ngIf="passenger.fName" matSuffix mat-icon-button aria-label="Clear" (click)="passenger.fName=''">
+                                <mat-icon>close</mat-icon>
                             </button>
-                          </mat-form-field>
-                          <mat-form-field class="example-form-field" appearance="fill">
-                            <mat-label>Clearable input</mat-label>
-                            <input matInput type="text" [(ngModel)]="value">
-                            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                              <mat-icon>close</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field class="example-form-field" appearance="fill">
+                            <mat-label>{{pageDict.passenger_details.passengerLastName}}</mat-label>
+                            <input matInput type="text" [(ngModel)]="passenger.lName">
+                            <button *ngIf="passenger.lName" matSuffix mat-icon-button aria-label="Clear" (click)="passenger.lName=''">
+                                <mat-icon>close</mat-icon>
                             </button>
-                          </mat-form-field>
-                          <mat-form-field class="example-form-field" appearance="fill">
-                            <mat-label>Clearable input</mat-label>
-                            <input matInput type="text" [(ngModel)]="value">
-                            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                              <mat-icon>close</mat-icon>
-                            </button>
-                          </mat-form-field>
-                        <p>This card has divider and indeterminate progress as footer</p>
-                        <p>This card has divider and indeterminate progress as footer</p>
-                        <p>This card has divider and indeterminate progress as footer</p>
-                        <p>This card has divider and indeterminate progress as footer</p>
-                        <p>This card has divider and indeterminate progress as footer</p>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{pageDict.passenger_details.passengerSex}}</mat-label>
+                            <mat-select [(value)]="passenger.sex">
+                                <mat-option [value]="'Male'"> {{pageDict.passenger_details.passengerSexMale}}</mat-option>
+                                <mat-option [value]="'Female'"> {{pageDict.passenger_details.passengerSexFemale}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
 
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>{{pageDict.passenger_details.passengerBirthDate}}</mat-label>
+                            <input matInput [max]="maxBirthDate" [matDatepicker]="birthDate" disabled
+                            (dateChange)="passenger.birthdate = $event.value">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+                            <mat-datepicker #birthDate disabled="false"></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{pageDict.passenger_details.passengerNationality}}</mat-label>
+                            <mat-select [(value)]="passenger.nationalityId">
+                                <mat-option *ngFor="let nationality of nationalities" [value]="nationality.id"> {{nationality.name}}</mat-option>
+                                <mat-option [value]=""> {{pageDict.passenger_details.passengerSexFemale}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-form-field" appearance="fill">
+                            <mat-label>{{pageDict.passenger_details.passengerPassNo}}</mat-label>
+                            <input matInput type="text" [(ngModel)]="passenger.passportNo">
+                            <button *ngIf="passenger.passportNo" matSuffix mat-icon-button aria-label="Clear" (click)="passenger.passportNo=''">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>{{pageDict.passenger_details.passengerPassExpireDate}}</mat-label>
+                            <input matInput [min]="passenger.birthdate" [max]="" [matDatepicker]="passExpireDate" disabled
+                                (dateChange)="passenger.passportDateOfExpire = $event.value">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="passExpireDate"></mat-datepicker-toggle>
+                            <mat-datepicker #passExpireDate disabled="false"></mat-datepicker>
+                        </mat-form-field>
                     </mat-card-content>
                     <mat-divider inset></mat-divider>
                     <mat-card-actions>
@@ -62,6 +87,7 @@
                     </mat-card-actions>
                     <mat-card-footer>
                     </mat-card-footer>
+                    {{passenger|json}}
                 </mat-card>
             </div>
         </div>

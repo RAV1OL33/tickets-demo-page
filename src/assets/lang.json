@@ -9,14 +9,18 @@
             "nextButton": "Оформить",
             "passengers": "Пассажиры"
         },
-        "passengers_details":{
-            "passengerTitle": "",
-            "passengerFirstName": "",
-            "passengerLastName": "",
-            "passengerBirthDate": "",
-            "passengerPassNo": "",
-            "passengerPassType": "",
-            "passengerPassExpireDate": ""
+        "passenger_details":{
+            "passengerTitle": "Пассажир",
+            "passengerFirstName": "Имя",
+            "passengerLastName": "Фамилия",
+            "passengerBirthDate": "Дата рождения",
+            "passengerPassNo": "Номер паспорта",
+            "passengerPassType": "Тип документа",
+            "passengerPassExpireDate": "Действителен до",
+            "passengerNationality": "Национальность",
+            "passengerSex": "Пол",
+            "passengerSexFemale": "Женский",
+            "passengerSexMale": "Мужской"
         }
     }
 }

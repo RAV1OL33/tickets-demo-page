@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { delay, Observable } from 'rxjs';
 import {
-  Airport,
   AllowedDirection,
   City,
   Country,
   Nationality,
+  Order,
+  Passenger,
+  Airport,
 } from './mock.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +21,14 @@ export class MockService {
   private citiesUrl: string = '../assets/cities.json';
   private nationalitiesUrl: string = '../assets/nationalities.json';
   private allowedDirectionsUrl: string = '../assets/allowedDirections.json';
+  private order = <Order>{}
+  private order2: Airport[] = []
+  private orderData = new BehaviorSubject(this.order)
 
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) { }
+
+
+
 
   public getAirports(): Observable<Airport[]> {
     return this.httpClient.get<Airport[]>(this.airportsUrl).pipe(delay(1000));
@@ -39,5 +48,20 @@ export class MockService {
     return this.httpClient
       .get<AllowedDirection[]>(this.allowedDirectionsUrl)
       .pipe(delay(300));
+  }
+
+  public setAirport(airportTo: Airport,airportFrom: Airport,) {
+    this.order.airportTo = airportTo
+    this.order.airportFrom = airportFrom
+    this.setOrderData(this.order)
+  }
+  public setOrderData(newOrderData: Order) {
+    this.orderData.next(newOrderData)
+
+    this.orderData.subscribe(data => {
+      console.log(data)
+    })
+
+    // console.log(this.orderData)
   }
 }

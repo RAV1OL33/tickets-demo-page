@@ -30,12 +30,8 @@
                 </button>
                 {{node.name}}
             </mat-tree-node>
-            <mat-tree-node *matTreeNodeDef="let node;when: hasNoChild" matTreeNodePadding>
-                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
-                    <mat-icon class="mat-icon-rtl-mirror">
-                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                    </mat-icon>
-                </button>a
+            <mat-tree-node *matTreeNodeDef="let node;when: hasNoChild" matTreeNodePadding
+                (click)="setAirport(node.name)">
                 {{node.name}}
             </mat-tree-node>
         </mat-tree>
@@ -44,9 +40,10 @@
 <div class="order-details__destination-picker__datepicker">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>{{pageDict.order_summary.datepickerFromInput}}</mat-label>
-        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" disabled>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" disabled
+            (dateChange)="setDate($event.value)">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker disabled ="false"></mat-datepicker>
-      </mat-form-field>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
 </div>
