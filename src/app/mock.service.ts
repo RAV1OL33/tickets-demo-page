@@ -22,7 +22,6 @@ export class MockService {
   private nationalitiesUrl: string = '../assets/nationalities.json';
   private allowedDirectionsUrl: string = '../assets/allowedDirections.json';
   private order = <Order>{}
-  private order2: Airport[] = []
   private orderData = new BehaviorSubject(this.order)
 
   constructor(private readonly httpClient: HttpClient) { }
@@ -50,7 +49,7 @@ export class MockService {
       .pipe(delay(300));
   }
 
-  public setAirport(airportTo: Airport,airportFrom: Airport,) {
+  public setAirport(airportTo: Airport, airportFrom: Airport,) {
     this.order.airportTo = airportTo
     this.order.airportFrom = airportFrom
     this.setOrderData(this.order)
@@ -58,10 +57,13 @@ export class MockService {
   public setOrderData(newOrderData: Order) {
     this.orderData.next(newOrderData)
 
-    this.orderData.subscribe(data => {
-      console.log(data)
-    })
+    // this.orderData.subscribe(data => {
+    //   console.log(data)
+    // })
 
-    // console.log(this.orderData)
+
+  }
+  public getOrderData(): Observable<Order> {
+    return this.orderData
   }
 }

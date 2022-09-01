@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import langJSON from 'src/assets/lang.json'
 import countriesJSON from 'src/assets/countries.json'
 import allowedDirections from 'src/assets/allowedDirections.json'
@@ -23,7 +23,9 @@ export class TreeItem {
   styleUrls: ['./destination-picker.component.scss']
 })
 export class DestinationPickerComponent implements OnInit {
-
+  @Input() isDateValid: boolean = true
+  @Input() isAirportValid: boolean = true
+  @Input() isFrom: boolean = true
   @Output() airportEvent = new EventEmitter<Airport>()
   @Output() dateEvent = new EventEmitter<Date>()
   private airports: Airport[] = []
@@ -122,11 +124,13 @@ export class DestinationPickerComponent implements OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener)
 
   setAirport(targetAirportName: string) {
+    this.isAirportValid = true
     this.airportEvent.emit(this.airports.filter(airport => airport.name == targetAirportName)[0]) 
   }
   setDate(date: Date){
     console.log(date)
-    this.dateEvent.emit(new Date)
+    this.isDateValid = true
+    this.dateEvent.emit(date)
   }
 
 }

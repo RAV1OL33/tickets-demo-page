@@ -7,7 +7,9 @@
             "datepickerFromInput": "Когда",
             "datepickerToInput": "Обратно",
             "nextButton": "Оформить",
-            "passengers": "Пассажиры"
+            "passengers": "Пассажиры",
+            "summaryTitle": "Заказ"
+
         },
         "passenger_details":{
             "passengerTitle": "Пассажир",
@@ -20,7 +22,19 @@
             "passengerNationality": "Национальность",
             "passengerSex": "Пол",
             "passengerSexFemale": "Женский",
-            "passengerSexMale": "Мужской"
+            "passengerSexMale": "Мужской",
+            "documentType": "Документ",
+            "internationalPassport": "Международный паспорт",
+            "internalPassport": "Паспорт"
+        },
+        "errors":{
+            "airportFrom":"Выберите аэропорт отправления",
+            "airportTo":"Выберите аэропорт прибытия",
+            "dateFrom":"Укажите дату отправления отправления",
+            "dateTo":"Укажите дату отправления прибытия",
+            "required": "Обязательное поле",
+            "more20":"Для лиц старше 20 лет",
+            "expireDate":"Паспорт действителен менее 6 месяцев"
         }
     }
 }

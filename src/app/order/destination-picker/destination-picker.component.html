@@ -2,7 +2,8 @@
     <div class="order-details__destination-picker__search-field">
         <form action="">
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>{{pageDict.order_summary.airportFromInput}}</mat-label>
+                <mat-label>{{isFrom?pageDict.order_summary.airportFromInput:pageDict.order_summary.airportToInput}}
+                </mat-label>
                 <input type="text" placeholder="" aria-label="Number" matInput [formControl]="myControl"
                     [matAutocomplete]="auto">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -36,6 +37,9 @@
             </mat-tree-node>
         </mat-tree>
     </div>
+    <div *ngIf="!isAirportValid">
+        {{isFrom?pageDict.errors.airportFrom:pageDict.errors.airportTo}}
+    </div>
 </div>
 <div class="order-details__destination-picker__datepicker">
     <mat-form-field class="example-full-width" appearance="fill">
@@ -46,4 +50,8 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
     </mat-form-field>
+    <div *ngIf="!isDateValid">
+        {{isFrom?pageDict.errors.dateFrom:pageDict.errors.dateTo}}
+    </div>
 </div>
+{{isDateValid}}
