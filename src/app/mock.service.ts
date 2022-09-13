@@ -16,11 +16,11 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class MockService {
-  private citiesUrl: string = '../assets/cities.json';
-  private airportsUrl: string = '../assets/airports.json';
-  private countriesUrl: string = '../assets/countries.json';
-  private nationalitiesUrl: string = '../assets/nationalities.json';
-  private allowedDirectionsUrl: string = '../assets/allowedDirections.json';
+  private citiesUrl: string = './assets/cities.json';
+  private airportsUrl: string = './assets/airports.json';
+  private countriesUrl: string = './assets/countries.json';
+  private nationalitiesUrl: string = './assets/nationalities.json';
+  private allowedDirectionsUrl: string = './assets/allowedDirections.json';
 
   private orderData = new BehaviorSubject(<Order>{})
 
