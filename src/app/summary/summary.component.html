@@ -1,20 +1,51 @@
-<div class="order-details__container">
-    <div class="order-details__body">
-        <div class="order-details__destination-container">
-            <div class="order-details__destination">
-                <app-destination-picker [isSubmit]="isSubmit" [isLoadFrom]="isLoadFrom"> </app-destination-picker>
+<div class="order-summary__container">
+    <mat-accordion class="" multi>
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{pageDict.order_summary.summaryTitle}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{pageDict.order_summary.titleDescription}} 
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="flex-sides">
+                <div>{{destinationFrom}}</div>
+                <div>{{destinationTo}}</div>
             </div>
-        </div>
-        <div class="order-details__passengers-count flex-row">
-            <div>{{pageDict.order_summary.passengers}}:</div>
-            <div class="flex-row">
-                <button mat-raised-button disabled="{{passengers.length<2}}" (click)="deletePassenger()">-</button>
-                <div>{{passengers.length}}</div><button mat-raised-button (click)="addNewPassenger()">+</button>
+            <div class="order-summary__destination flex-sides">
+                <mat-form-field class="" appearance="fill">
+                    <mat-label>{{pageDict.order_summary.datepickerFromInput}}</mat-label>
+                    <input matInput [matDatepicker]="fromDate" [formControl]="dateFrom">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                    <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="" appearance="fill">
+                    <mat-label>{{pageDict.order_summary.datepickerToInput}}</mat-label>
+                    <input matInput [max]="" [matDatepicker]="toDate" [formControl]="dateTo">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="toDate" disable="false"></mat-datepicker-toggle>
+                    <mat-datepicker #toDate></mat-datepicker>
+                </mat-form-field>
             </div>
-        </div>
-        <div class="order-details__passengers-list__container">
+            <div class="order-summary__countdown">
+                <app-countdown [departureDate]="this.order.departureDate" [arrivalDate]="this.order.arrivalDate">
+                </app-countdown>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{pageDict.order_summary.passengers}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{pageDict.passenger_details.titleDescription}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+    
             <form action="" [formGroup]="passengerForm">
-                <div formArrayName="passengersArray" class="order-details__passengers-list__body passengers-list__body">
+                <div formArrayName="passengersArray">
                     <div *ngFor="let pForm of passengersFormArray.controls; let i = index" [formGroupName]="i">
                         <mat-card class="passengers-list__card">
                             <mat-card-title>{{pageDict.passenger_details.passengerTitle}} {{i+1}}</mat-card-title>
@@ -22,15 +53,13 @@
                                 <mat-form-field class="example-form-field" appearance="fill">
                                     <mat-label>{{pageDict.passenger_details.passengerFirstName}}</mat-label>
                                     <input matInput type="text" formControlName="fName">
-                                    <mat-error
-                                        *ngIf="passengersFormArray.controls[i].get('fName')?.errors?.['required']">
+                                    <mat-error *ngIf="passengersFormArray.controls[i].get('fName')?.errors?.['required']">
                                         {{pageDict.errors.required}}</mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="example-form-field" appearance="fill">
                                     <mat-label>{{pageDict.passenger_details.passengerLastName}}</mat-label>
                                     <input matInput type="text" formControlName="lName">
-                                    <mat-error
-                                        *ngIf="passengersFormArray.controls[i].get('lName')?.errors?.['required']">
+                                    <mat-error *ngIf="passengersFormArray.controls[i].get('lName')?.errors?.['required']">
                                         {{pageDict.errors.required}} </mat-error>
                                 </mat-form-field>
                                 <mat-form-field appearance="fill">
@@ -46,13 +75,13 @@
                                     <mat-error *ngIf="passengersFormArray.controls[i].get('sex')?.errors?.['required']">
                                         {{pageDict.errors.required}}</mat-error>
                                 </mat-form-field>
-                                <mat-form-field class="" appearance="fill">
+                                <mat-form-field class="example-full-width" appearance="fill">
                                     <mat-label>{{pageDict.passenger_details.passengerBirthDate}}</mat-label>
                                     <input matInput [max]="maxBirthDate" [matDatepicker]="birthDate"
                                         formControlName="birthdate">
                                     <mat-hint>MM/DD/YYYY</mat-hint>
                                     <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
-                                    <mat-datepicker #birthDate disabled="false"></mat-datepicker>
+                                    <mat-datepicker #birthDate></mat-datepicker>
                                     <mat-error
                                         *ngIf="passengersFormArray.controls[i].get('birthdate')?.errors?.['required']">
                                         {{pageDict.errors.required}}
@@ -91,10 +120,6 @@
                                 <mat-form-field class="example-form-field" appearance="fill">
                                     <mat-label>{{pageDict.passenger_details.passengerPassNo}}</mat-label>
                                     <input matInput type="text" formControlName="passportNo">
-                                    <button *ngIf="passengers[i].passportNo" matSuffix mat-icon-button
-                                        aria-label="Clear" (click)="passengers[i].passportNo=''">
-                                        <mat-icon>close</mat-icon>
-                                    </button>
                                     <mat-error
                                         *ngIf="passengersFormArray.controls[i].get('passportNo')?.errors?.['required']">
                                         {{pageDict.errors.required}}</mat-error>
@@ -105,7 +130,7 @@
                                         formControlName="passportDateOfExpire">
                                     <mat-hint>MM/DD/YYYY</mat-hint>
                                     <mat-datepicker-toggle matSuffix [for]="passExpireDate"></mat-datepicker-toggle>
-                                    <mat-datepicker #passExpireDate disabled="false"></mat-datepicker>
+                                    <mat-datepicker #passExpireDate></mat-datepicker>
                                     <mat-error
                                         *ngIf="passengersFormArray.controls[i].get('passportDateOfExpire')?.errors?.['required']">
                                         {{pageDict.errors.required}}
@@ -114,25 +139,22 @@
                                         *ngIf="passengersFormArray.controls[i].get('passportDateOfExpire')?.errors?.['passportDateOfExpireInvalid'] && passengersFormArray.controls[i].get('passportDateOfExpire')?.value">
                                         {{pageDict.errors.expireDate}}
                                     </mat-error>
-                                    <mat-error
-                                        *ngIf="passengersFormArray.controls[i].get('passportDateOfExpire')?.errors?.['min'] && passengersFormArray.controls[i].get('passportDateOfExpire')?.value">
-                                        {{pageDict.errors.expireDate}}dfg
-                                    </mat-error>
                                 </mat-form-field>
                             </mat-card-content>
-                            <!-- <mat-divider inset></mat-divider>
-                            <mat-card-actions>
-                                <button mat-button>LIKE</button>
-                                <button mat-button>SHARE</button>
-                            </mat-card-actions> -->
+                            <mat-divider inset></mat-divider>
+                            <mat-card-actions *ngIf="pForm.disabled">
+                                <button mat-button (click)="editPassenger(i)">{{pageDict.order_summary.editBtn}}</button>
+                            </mat-card-actions>
+                            <mat-card-actions *ngIf="!pForm.disabled">
+                                <button mat-button (click)="reverseChanges(i)">{{pageDict.order_summary.canselBtn}}</button>
+                                <button mat-button (click)="applyChanges(i)">{{pageDict.order_summary.applyBtn}}</button>
+                            </mat-card-actions>
                             <mat-card-footer>
                             </mat-card-footer>
                         </mat-card>
                     </div>
                 </div>
-                <!-- {{passengerForm.value.passengersArray|json}} -->
             </form>
-        </div>
-        <button mat-raised-button color="primary" (click)="submitOrder()">{{pageDict.order_summary.submitBtn}}</button>
-    </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>

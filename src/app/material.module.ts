@@ -1,31 +1,34 @@
 import { NgModule } from '@angular/core';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
-import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTreeModule } from '@angular/material/tree';
 import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
 @NgModule({
   exports: [
-    MatAutocompleteModule,
-    MatInputModule,
     MatIconModule,
     MatTreeModule,
-    MatButtonModule,
-    MatDatepickerModule,
     MatCardModule,
-    MatDividerModule,
+    MatInputModule,
     MatSelectModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatDividerModule,
     MatToolbarModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatAutocompleteModule,
+
   ]
 })
 export class MaterialModule { }

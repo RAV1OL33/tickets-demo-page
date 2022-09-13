@@ -1,0 +1,11 @@
+<div *ngIf="days>=0&&hours>=0&&minutes>=0&&seconds>=0">
+    <div>
+        {{pageDict.order_summary.beforeOrder}}
+    </div>
+    <div>
+        {{days}}{{pageDict.order_summary.days}} {{hours}}:{{minutes}}:{{seconds}}
+    </div>
+</div>
+<div *ngIf="!(days>=0&&hours>=0&&minutes>=0&&seconds>=0)&&days">
+    {{pageDict.order_summary.orderComplete}}
+</div>
