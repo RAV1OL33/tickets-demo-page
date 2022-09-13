@@ -1,0 +1,49 @@
+{
+    "ru": {
+        "order_summary": {
+            "airportFromInput": "Откуда",
+            "inputSubString": "",
+            "airportToInput": "Куда",
+            "datepickerFromInput": "Отправление",
+            "datepickerToInput": "Прибытие",
+            "nextButton": "Оформить",
+            "passengers": "Пассажиры",
+            "summaryTitle": "Заказ",
+            "editBtn": "Редактировать",
+            "applyBtn": "Ок",
+            "canselBtn": "Отмена",
+            "submitBtn":"Подтвердить",
+            "loadStorage": "Загрузить предыдущий заказ?",
+            "titleDescription":"Дата отправления и прибытия",
+            "days": "д.",
+            "beforeOrder":" До отправления: ",
+            "orderComplete": "Самолет отправился! "
+        },
+        "passenger_details": {
+            "passengerTitle": "Пассажир",
+            "passengerFirstName": "Имя",
+            "passengerLastName": "Фамилия",
+            "passengerBirthDate": "Дата рождения",
+            "passengerPassNo": "Номер паспорта",
+            "passengerPassType": "Тип документа",
+            "passengerPassExpireDate": "Действителен до",
+            "passengerNationality": "Национальность",
+            "passengerSex": "Пол",
+            "passengerSexFemale": "Женский",
+            "passengerSexMale": "Мужской",
+            "documentType": "Документ",
+            "internationalPassport": "Международный паспорт",
+            "internalPassport": "Паспорт",
+            "titleDescription": "Инфо и паспортные данные пассажиров"
+        },
+        "errors": {
+            "airportFrom": "Выберите аэропорт отправления",
+            "expireDate": "Паспорт действителен менее 6 месяцев",
+            "airportTo": "Выберите аэропорт прибытия",
+            "dateFrom": "Укажите дату отправления",
+            "required": "Обязательное поле",
+            "dateTo": "Укажите дату прибытия",
+            "more20": "Для лиц старше 20 лет"
+        }
+    }
+}
